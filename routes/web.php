@@ -25,7 +25,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/update_status_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'update_status'])->name('update.status');
         Route::get('/index', [\App\Http\Controllers\LaporanController::class,'index']);
         Route::get('/data_user', [\App\Http\Controllers\UserRoleController::class,'index']);
+        Route::get('/edit_user/{id}', [\App\Http\Controllers\UserRoleController::class,'edit'])->name('edit.user');
+        Route::post('/change_password/{id}', [\App\Http\Controllers\UserRoleController::class,'update'])->name('change.password');
         Route::get('/sesi/logout', [SessionController::class, 'logout'])->name('logout.user');
+        Route::get('/laporan/export', [\App\Http\Controllers\LaporanController::class, 'exportToExcel'])->name('laporan.export');
+
     });
     Route::prefix('user')->group(function (){
         Route::get('/data_kendaraan',[\App\Http\Controllers\KendaraanController::class, 'index']);

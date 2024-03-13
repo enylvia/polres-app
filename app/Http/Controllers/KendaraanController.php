@@ -46,7 +46,7 @@ class KendaraanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('kendaraan/create')
+            return redirect('/user/create_data_kendaraan')
                 ->withErrors($validator)
                 ->withInput();
         }

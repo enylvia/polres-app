@@ -31,6 +31,7 @@
                         <th>NIK</th>
                         <th>Nomor Telepon</th>
                         <th>Email</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,11 +42,9 @@
                             <td>{{ $user->nik }}</td>
                             <td>{{ $user->phone_number }}</td>
                             <td>{{ $user->email }}</td>
-{{--                            <td class="d-flex align-items-center">--}}
-{{--                                <a href="{{ route('detail.user', $user->id) }}" class="btn btn-sm btn-primary mr-2">Detail</a>--}}
-
-{{--                                <a href="#" class="btn btn-sm btn-danger" onclick="confirmDelete('{{ route('delete.user', $user->id) }}')">Delete</a>--}}
-{{--                            </td>--}}
+                            <td class="d-flex align-items-center">
+                                <a href="{{ route('edit.user', $user->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

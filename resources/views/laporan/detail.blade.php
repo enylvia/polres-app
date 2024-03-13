@@ -22,6 +22,9 @@
 
                         <dt class="col-sm-4">Tanggal Hilang:</dt>
                         <dd class="col-sm-8">{{ \Carbon\Carbon::parse($laporan->tangal_hilang)->format('Y F d') }}</dd>
+
+                        <dt class="col-sm-4">Deskripsi Kehilangan:</dt>
+                        <dd class="col-sm-8">{{$laporan->deskripsi}}</dd>
                     </dl>
                 </div>
                 <div class="col-md-6">

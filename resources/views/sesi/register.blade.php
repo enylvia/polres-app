@@ -41,15 +41,12 @@
                     <small>{{ $message }}</small>
                 @enderror
             </div>
-            <button name="submit" type="submit" class="btn btn-primary btn-user btn-block">register </button>
+            <button name="submit" type="submit" class="btn btn-primary btn-user btn-block">Register</button>
 
         </form>
     </div>
 
     <hr>
-    <div class="text-center">
-        <a class="small" href="#">Lupa Password?</a>
-    </div>
     <div class="text-center">
         <a class="small" href="#">Buat Akun!</a>
     </div>

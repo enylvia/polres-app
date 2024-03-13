@@ -7,6 +7,9 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Laporan</h6>
         </div>
         <div class="card-body">
+            <div class="text-right py-3">
+                <a href="{{route('laporan.export')}}" class="btn btn-sm btn-secondary">Cetak Laporan</a>
+            </div>
             @if(Session::has('success'))
                 <div class="alert alert-success">
                     {{ Session::get('success') }}

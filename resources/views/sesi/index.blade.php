@@ -42,9 +42,6 @@
 
     <hr>
     <div class="text-center">
-        <a class="small" href="#">Lupa Password?</a>
-    </div>
-    <div class="text-center">
         <a class="small" href="{{route('register')}}">Buat Akun!</a>
     </div>
 @endsection

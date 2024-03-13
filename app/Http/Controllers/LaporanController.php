@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanExport;
 use App\Models\Kendaraan;
 use App\Models\Laporan;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\App;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
@@ -99,8 +101,11 @@ class LaporanController extends Controller
 
         $dates = $date->format('d F Y');
         $tahun = $date->format('Y');
+        $namaBulan = $date->format('F');
 
-        $format_no_laporan = 'LP / B / 468 / XI / ' . $tahun . ' / RESKRIM / SPKT / POLRES / NABIRE / POLDA PAPUA, ' . $dates;
+        $romawiBulan = $this->convertBulanToRomawi($namaBulan);
+
+        $format_no_laporan = 'LP / B / 468 / ' . $romawiBulan . ' / ' . $tahun . ' / RESKRIM / SPKT / POLRES / NABIRE / POLDA PAPUA, ' . $dates;
 
         // Menyimpan data laporan ke database
         $request->id_user = $user_id;
@@ -166,7 +171,7 @@ class LaporanController extends Controller
         // Menghapus laporan dari database
         $laporan->delete();
 
-        return redirect('/laporan')->with('success', 'Laporan berhasil dihapus!');
+        return redirect('/user/data_laporan')->with('success', 'Laporan berhasil dihapus!');
     }
 
     public function update_status(Request $request, $id)
@@ -192,5 +197,29 @@ class LaporanController extends Controller
         } else {
             return redirect()->back()->with('error', 'Laporan tidak ditemukan.');
         }
+    }
+    function convertBulanToRomawi($namaBulan)
+    {
+        $romawiBulan = [
+            'Januari' => 'I',
+            'Februari' => 'II',
+            'Maret' => 'III',
+            'April' => 'IV',
+            'Mei' => 'V',
+            'Juni' => 'VI',
+            'Juli' => 'VII',
+            'Agustus' => 'VIII',
+            'September' => 'IX',
+            'Oktober' => 'X',
+            'November' => 'XI',
+            'Desember' => 'XII'
+        ];
+
+        return $romawiBulan[$namaBulan] ?? '';
+    }
+
+    public function exportToExcel()
+    {
+        return Excel::download(new LaporanExport, 'laporan.xlsx');
     }
 }
