@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function (){
-        Route::get('/data_laporan', [\App\Http\Controllers\LaporanController::class, 'index_laporan_user'])->name('admin.laporan');
         Route::get('/data_laporan_arsip', [\App\Http\Controllers\LaporanController::class, 'index_laporan_arsip'])->name('admin.laporan.arsip');
         Route::get('/data_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'show'])->name('laporan.detail');
         Route::get('/update_status_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'update_status'])->name('update.status');
@@ -31,6 +30,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/laporan/export', [\App\Http\Controllers\LaporanController::class, 'exportToExcel'])->name('laporan.export');
 
     });
+    Route::get('/data_laporan', [\App\Http\Controllers\LaporanController::class, 'index_laporan_user']);
     Route::prefix('user')->group(function (){
         Route::get('/data_kendaraan',[\App\Http\Controllers\KendaraanController::class, 'index']);
         Route::get('/create_data_kendaraan',[\App\Http\Controllers\KendaraanController::class, 'create']);
@@ -41,13 +41,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete_kendaraan/{id}', [\App\Http\Controllers\KendaraanController::class,'destroy'])->name('delete.kendaraan');
 
 //        LAPORAN
-        Route::get('/data_laporan', [\App\Http\Controllers\LaporanController::class, 'index_laporan_user']);
         Route::get('/create_laporan',[\App\Http\Controllers\LaporanController::class,'create'])->name('laporan.create_data');
         Route::post('/laporan_store',[\App\Http\Controllers\LaporanController::class,'store'])->name('laporan.store');
         Route::get('/data_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'show'])->name('laporan.detail');
         Route::get('/delete_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'destroy'])->name('laporan.delete');
         Route::get('/edit_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'edit'])->name('laporan.edit');
         Route::put('/edit_laporan/{id}', [\App\Http\Controllers\LaporanController::class,'update'])->name('laporan.update');
+
+        Route::get('/edit_profile/{id}', [\App\Http\Controllers\UserRoleController::class,'edit_profile'])->name('edit.profile');
+        Route::post('/update_profile/{id}', [\App\Http\Controllers\UserRoleController::class,'update_profile'])->name('update.profile');
+
     });
 });
 //public router

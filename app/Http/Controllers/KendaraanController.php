@@ -60,6 +60,10 @@ class KendaraanController extends Controller
         $scan_stnkPath = null;
         $foto_ktpPath = null;
         $foto_kendaraanPath = null;
+        $scan_bpkbUrl = null;
+        $scan_stnkUrl = null;
+        $foto_ktpUrl = null;
+        $foto_kendaraanUrl = null;
 
         // Menyimpan gambar ke storage dan mendapatkan path jika file tidak null
         if ($request->hasFile('scan_bpkb')) {
@@ -148,7 +152,9 @@ class KendaraanController extends Controller
         ]);
 
         if ($request->hasFile('scan_bpkb')) {
-            Storage::delete($kendaraan->scan_bpkb);
+            if ($kendaraan->scan_bpkb != null){
+                Storage::delete($kendaraan->scan_bpkb);
+            }
             $scan_bpkbFileName = Str::random(20) . '.' . $request->file('scan_bpkb')->getClientOriginalExtension();
             $scan_bpkbPath = $request->file('scan_bpkb')->storeAs('public/scan_bpkb', $scan_bpkbFileName);
             $scan_bpkbUrl = Storage::url($scan_bpkbPath);
@@ -156,7 +162,9 @@ class KendaraanController extends Controller
         }
 
         if ($request->hasFile('scan_stnk')) {
-            Storage::delete($kendaraan->scan_stnk);
+            if ($kendaraan->scan_stnk != null){
+                Storage::delete($kendaraan->scan_stnk);
+            }
             $scan_stnkFileName = Str::random(20) . '.' . $request->file('scan_stnk')->getClientOriginalExtension();
             $scan_stnkPath = $request->file('scan_stnk')->storeAs('public/scan_stnk', $scan_stnkFileName);
             $scan_stnkUrl = Storage::url($scan_stnkPath);
@@ -164,7 +172,9 @@ class KendaraanController extends Controller
         }
 
         if ($request->hasFile('foto_ktp')) {
-            Storage::delete($kendaraan->foto_ktp);
+            if ($kendaraan->foto_ktp != null){
+                Storage::delete($kendaraan->foto_ktp);
+            }
             $foto_ktpFileName = Str::random(20) . '.' . $request->file('foto_ktp')->getClientOriginalExtension();
             $foto_ktpPath = $request->file('foto_ktp')->storeAs('public/foto_ktp', $foto_ktpFileName);
             $foto_ktpUrl = Storage::url($foto_ktpPath);
@@ -172,7 +182,9 @@ class KendaraanController extends Controller
         }
 
         if ($request->hasFile('foto_kendaraan')) {
-            Storage::delete($kendaraan->foto_kendaraan);
+            if ($kendaraan->foto_kendaraan != null) {
+                Storage::delete($kendaraan->foto_kendaraan);
+            }
             $foto_kendaraanFileName = Str::random(20) . '.' . $request->file('foto_kendaraan')->getClientOriginalExtension();
             $foto_kendaraanPath = $request->file('foto_kendaraan')->storeAs('public/foto_kendaraan', $foto_kendaraanFileName);
             $foto_kendaraanUrl = Storage::url($foto_kendaraanPath);

@@ -25,6 +25,9 @@
 
                         <dt class="col-sm-4">Deskripsi Kehilangan:</dt>
                         <dd class="col-sm-8">{{$laporan->deskripsi}}</dd>
+
+                        <dt class="col-sm-4">Alamat Pelapor:</dt>
+                        <dd class="col-sm-8">{{$laporan->alamat_pelapor}}</dd>
                     </dl>
                 </div>
                 <div class="col-md-6">
@@ -88,7 +91,7 @@
                 </div>
             </div>
             <div class="text-right mt-4">
-                <a href="/user/data_laporan" class="btn btn-secondary">Kembali</a>
+                <a href="/data_laporan" class="btn btn-secondary">Kembali</a>
             </div>
         </div>
     </div>

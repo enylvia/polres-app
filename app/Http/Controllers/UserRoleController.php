@@ -32,4 +32,43 @@ class UserRoleController extends Controller
 
         return redirect('/admin/data_user')->with('success', 'Password berhasil diperbarui.');
     }
+    public function edit_profile($id)
+    {
+        // Ambil data user berdasarkan ID
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('errors', 'User not found.');
+        }
+
+        return view('user.edit_profile', compact('user'));
+    }
+
+    public function update_profile(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'nik' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        // Ambil data user berdasarkan ID
+        $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->back()->with('errors', 'User not found.');
+        }
+
+        // Update data user
+        $user->name = $request->name;
+        $user->nik = $request->nik;
+        $user->phone_number = $request->phone_number;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
+
 }

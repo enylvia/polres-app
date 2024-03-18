@@ -12,7 +12,7 @@ class Laporan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id_laporan_status','id_user','id_kendaraan','no_laporan','tanggal_laporan','tanggal_hilang','deskripsi','is_arsip'];
+    protected $fillable = ['id_laporan_status','id_user','id_kendaraan','alamat_pelapor','no_laporan','tanggal_laporan','tanggal_hilang','deskripsi','is_arsip'];
     public function User(): BelongsTo
     {
         return $this->belongsTo(User::class);

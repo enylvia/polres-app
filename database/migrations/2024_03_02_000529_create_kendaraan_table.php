@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('nomor_polisi');
             $table->string('no_rangka');
             $table->string('no_mesin');
-            $table->string('scan_bpkb');
-            $table->string('scan_stnk');
-            $table->string('foto_ktp');
-            $table->string('foto_kendaraan');
+            $table->string('scan_bpkb')->nullable(true)->default(null);
+            $table->string('scan_stnk')->nullable(true)->default(null);
+            $table->string('foto_ktp')->nullable(true)->default(null);
+            $table->string('foto_kendaraan')->nullable(true)->default(null);
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');

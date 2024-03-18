@@ -48,6 +48,6 @@
 
     <hr>
     <div class="text-center">
-        <a class="small" href="#">Buat Akun!</a>
+        <a class="small" href="{{route('login')}}">Sudah punya akun?</a>
     </div>
 @endsection

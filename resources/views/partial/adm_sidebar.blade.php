@@ -26,7 +26,7 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Laporan</h6>
-                <a class="collapse-item" href="/admin/data_laporan">Data Laporan</a>
+                <a class="collapse-item" href="/data_laporan">Data Laporan</a>
                 <a class="collapse-item" href="/admin/data_laporan_arsip">Arsip</a>
 
                 <div class="collapse-divider"></div>
@@ -49,7 +49,7 @@
                 <a class="collapse-item" href="/user/data_kendaraan">Data Kendaraan</a>
                 <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Laporan</h6>
-                <a class="collapse-item" href="/user/data_laporan">Data Laporan</a>
+                <a class="collapse-item" href="/data_laporan">Data Laporan</a>
             </div>
         </div>
     </li>

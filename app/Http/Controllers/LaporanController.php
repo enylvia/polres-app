@@ -32,27 +32,42 @@ class LaporanController extends Controller
         return view('admin.index', compact('countPengguna', 'countTotalLaporan', 'countTotalLaporanSelesai', 'countTotalLaporanProses'));
     }
 
-    public function index_laporan_user()
+    public function index_laporan_user(Request $request)
     {
         if (Auth::check()) {
             $user_id = Auth::id();
-        }else {
-            return redirect('/user/data_laporan')
+        } else {
+            return redirect('/data_laporan')
                 ->with('errors', 'Unauthorized!');
         }
-        if (Auth::user()->id_user_role == 2) {
-            $laporans = Laporan::with('LaporanStatus')->where('is_arsip', false)->get();
-        }else{
-            $laporans = Laporan::with('LaporanStatus')->where('id_user',$user_id)->get();
+
+        $query = Laporan::with('LaporanStatus');
+
+        // Filter berdasarkan nama pengguna
+        if ($request->has('search')) {
+            $query->join('users', 'laporans.id_user', '=', 'users.id')
+                ->select('laporans.*','users.name')
+                ->where('users.name', 'like', '%' . $request->search . '%');
         }
-        return view("laporan.index",compact('laporans'));
+
+        // Filter berdasarkan role pengguna
+        if (Auth::user()->id_user_role != 2) {
+            $query->where('id_user', $user_id);
+        }
+
+        // Ambil data laporan
+        $laporans = $query->where('is_arsip', false)->get();
+
+        return view("laporan.index", compact('laporans'));
     }
+
+
     public function index_laporan_arsip()
     {
         if (Auth::check()) {
             $user_id = Auth::id();
         }else {
-            return redirect('/user/data_laporan')
+            return redirect('/data_laporan')
                 ->with('errors', 'Unauthorized!');
         }
         if (Auth::user()->id_user_role == 2) {
@@ -82,7 +97,7 @@ class LaporanController extends Controller
         if (Auth::check()) {
             $user_id = Auth::id();
         }else {
-            return redirect('/user/data_laporan')
+            return redirect('/data_laporan')
                 ->with('errors', 'Unauthorized!');
         }
         // Validasi input
@@ -91,6 +106,7 @@ class LaporanController extends Controller
             'tanggal_laporan' => 'required|date',
             'tanggal_hilang' => 'required|date',
             'deskripsi' => 'required|string',
+            'alamat_pelapor' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -104,8 +120,9 @@ class LaporanController extends Controller
         $namaBulan = $date->format('F');
 
         $romawiBulan = $this->convertBulanToRomawi($namaBulan);
+        $countTotalLaporan = Laporan::count();
 
-        $format_no_laporan = 'LP / B / 468 / ' . $romawiBulan . ' / ' . $tahun . ' / RESKRIM / SPKT / POLRES / NABIRE / POLDA PAPUA, ' . $dates;
+        $format_no_laporan = 'LP / B / ' . ($countTotalLaporan + 1) . ' / ' . $romawiBulan . ' / ' . $tahun . ' / RESKRIM / SPKT / POLRES / NABIRE / POLDA PAPUA, ' . $dates;
 
         // Menyimpan data laporan ke database
         $request->id_user = $user_id;
@@ -118,17 +135,18 @@ class LaporanController extends Controller
             'tanggal_laporan' => $request->tanggal_laporan,
             'tanggal_hilang' => $request->tanggal_hilang,
             'deskripsi' => $request->deskripsi,
+            'alamat_pelapor' => $request->alamat_pelapor,
         ]);
 
 
-        return redirect('/user/data_laporan')->with('success', 'Laporan berhasil ditambahkan!');
+        return redirect('/data_laporan')->with('success', 'Laporan berhasil ditambahkan!');
     }
 
     // Menampilkan detail laporan
     public function show($id)
     {
         $laporan = Laporan::with('kendaraan')->find($id);
-        return view('/laporan/detail', compact('laporan'));
+        return view('laporan.detail', compact('laporan'));
     }
 
     // Menampilkan form untuk mengedit laporan
@@ -148,10 +166,11 @@ class LaporanController extends Controller
             'tanggal_laporan' => 'required|date',
             'tanggal_hilang' => 'required|date',
             'deskripsi' => 'required|string',
+            'alamat_pelapor' => 'required|string',
         ]);
 
         if ($validator->fails()) {
-            return redirect("laporan/$id/edit")
+            return redirect("/edit_laporan/$id")
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -160,7 +179,7 @@ class LaporanController extends Controller
         $laporan = Laporan::find($id);
         $laporan->update($request->all());
 
-        return redirect('/user/data_laporan')->with('success', 'Laporan berhasil diperbarui!');
+        return redirect('/data_laporan')->with('success', 'Laporan berhasil diperbarui!');
     }
 
     // Menghapus laporan dari database
@@ -171,7 +190,7 @@ class LaporanController extends Controller
         // Menghapus laporan dari database
         $laporan->delete();
 
-        return redirect('/user/data_laporan')->with('success', 'Laporan berhasil dihapus!');
+        return redirect('/data_laporan')->with('success', 'Laporan berhasil dihapus!');
     }
 
     public function update_status(Request $request, $id)

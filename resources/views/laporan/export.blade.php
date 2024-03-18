@@ -26,6 +26,10 @@
         <th>No Laporan</th>
         <th>Tanggal Laporan</th>
         <th>Tanggal Hilang</th>
+        <th>No Rangka</th>
+        <th>No Mesin</th>
+        <th>Warna</th>
+        <th>Pelapor</th>
         <th>Deskripsi</th>
     </tr>
     </thead>
@@ -35,6 +39,10 @@
             <td>{{ $data->no_laporan }}</td>
             <td>{{ $data->tanggal_laporan }}</td>
             <td>{{ $data->tanggal_hilang }}</td>
+            <td>{{ $data->no_rangka }}</td>
+            <td>{{ $data->no_mesin }}</td>
+            <td>{{ $data->warna }}</td>
+            <td>{{ $data->name }}</td>
             <td>{{ $data->deskripsi }}</td>
         </tr>
     @endforeach

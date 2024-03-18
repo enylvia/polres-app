@@ -36,11 +36,18 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @error('alamat_pelapor')
+                        <small>{{ $message }}</small>
+                    @enderror
+                    <label for="alamat_pelapor">Alamat Pelapor:</label>
+                    <textarea class="form-control" id="alamat_pelapor" name="alamat_pelapor" rows="3" required placeholder="Jln.. Gg.."></textarea>
+                </div>
+                <div class="form-group">
                     @error('deskripsi')
                         <small>{{ $message }}</small>
                     @enderror
                     <label for="deskripsi">Deskripsi:</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" placeholder="Lokasi terakhir motor ... di jam ..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

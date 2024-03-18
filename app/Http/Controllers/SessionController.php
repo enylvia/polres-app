@@ -77,12 +77,11 @@ class SessionController extends Controller
         $data = [
             'name' =>$request->name,
             'nik' =>$request->nik,
-            'phone_nnumber' =>$request->phone_number,
+            'phone_number' =>$request->phone_number,
             'email' =>$request->email,
             'password' =>Hash::make($request->password),
         ];
-        User::create($data);
-
+        $create = User::create($data);
         $infologin = [
             'name' =>$request->name,
             'email' =>$request->email,

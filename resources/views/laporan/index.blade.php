@@ -7,9 +7,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Laporan</h6>
         </div>
         <div class="card-body">
+            @if(Auth::user()->id_user_role == 2)
             <div class="text-right py-3">
                 <a href="{{route('laporan.export')}}" class="btn btn-sm btn-secondary">Cetak Laporan</a>
             </div>
+            @endif
             @if(Session::has('success'))
                 <div class="alert alert-success">
                     {{ Session::get('success') }}
@@ -30,6 +32,16 @@
                     <a href="{{ route('laporan.create_data') }}" class="btn btn-sm btn-primary">Tambah Data</a>
                 </div>
                 @endif
+            <div class="py-3">
+                <form action="/data_laporan" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama user">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal_laporan');
             $table->date('tanggal_hilang');
             $table->text('deskripsi');
+            $table->text('alamat_pelapor');
             $table->boolean('is_arsip')->default(false);
             $table->timestamps();
 
