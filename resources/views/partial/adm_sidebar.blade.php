@@ -14,44 +14,34 @@
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
-
     <!-- Nav Item - Pages Collapse Menu -->
     @if(Auth::user()->id_user_role == 2)
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-            aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link" href="/data_laporan">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Management Access</span>
+            <span>Data Laporan</span>
         </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Laporan</h6>
-                <a class="collapse-item" href="/data_laporan">Data Laporan</a>
-                <a class="collapse-item" href="/admin/data_laporan_arsip">Arsip</a>
-
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Akun</h6>
-                <a class="collapse-item" href="/admin/data_user">Akun Pelapor</a>
-            </div>
-        </div>
+        <a class="nav-link" href="/admin/data_laporan_arsip">
+            <i class="fas fa-fw fa-paperclip"></i>
+            <span>Data Arsip</span>
+        </a>
+        <a class="nav-link" href="/admin/data_user">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Data User</span>
+        </a>
     </li>
     @endif
     @if(Auth::user()->id_user_role == 1)
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"
-           aria-expanded="true" aria-controls="collapsePages1">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>User Access</span>
+        <li class="nav-item">
+
+        <a class="nav-link" href="/user/data_kendaraan">
+            <i class="fas fa-fw fa-motorcycle"></i>
+            <span>Data Kendaraan</span>
         </a>
-        <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Kendaraan</h6>
-                <a class="collapse-item" href="/user/data_kendaraan">Data Kendaraan</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Laporan</h6>
-                <a class="collapse-item" href="/data_laporan">Data Laporan</a>
-            </div>
-        </div>
-    </li>
+        <a class="nav-link" href="/data_laporan">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Data Laporan</span>
+        </a>
+        </li>
     @endif
 </ul>
