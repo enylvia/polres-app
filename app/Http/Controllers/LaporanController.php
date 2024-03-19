@@ -170,7 +170,7 @@ class LaporanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect("/edit_laporan/$id")
+            return redirect("/user/edit_laporan/$id")
                 ->withErrors($validator)
                 ->withInput();
         }

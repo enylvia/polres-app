@@ -38,6 +38,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    @error('alamat_pelapor')
+                    <small>{{ $message }}</small>
+                    @enderror
+                    <label for="alamat_pelapor">Alamat Pelapor:</label>
+                    <textarea class="form-control" id="alamat_pelapor" name="alamat_pelapor" rows="3" required>{{$laporan->alamat_pelapor}}</textarea>
+                </div>
+                <div class="form-group">
                     @error('deskripsi')
                     <small>{{ $message }}</small>
                     @enderror
