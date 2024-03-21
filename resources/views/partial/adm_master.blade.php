@@ -20,13 +20,32 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pagination .results-text {
+            margin-right: 10px; /* Sesuaikan jarak kanan sesuai kebutuhan */
+        }
+
+        .pagination .pagination-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 10px; /* Sesuaikan jarak antara tombol pagination */
+        }
+    </style>
 </head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
+        <!-- Sidebar Toggle Button -->
         <!-- Sidebar -->
         @include('partial.adm_sidebar')
         <!-- End of Sidebar -->
@@ -36,7 +55,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Topbar -->
-                @include('partial.adm_topbar')
+                    @include('partial.adm_topbar')
                 <!--End Topbar -->
 
                 <!-- Begin Page Content -->

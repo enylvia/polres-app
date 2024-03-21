@@ -3,7 +3,7 @@
 @section('admin_content')
 
     <!-- Content Row -->
-    <div class="row">
+    <div class="row justify-content-center">
 
         <!-- Earnings (Monthly) Card Example -->
         @if(Auth::user()->id_user_role == 2)

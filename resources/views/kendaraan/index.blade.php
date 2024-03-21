@@ -42,7 +42,7 @@
                     <tbody>
                     @foreach($kendaraans as $key => $kendaraan)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ ($kendaraans->currentPage() - 1) * $kendaraans->perPage() + $key + 1 }}</td>
                             <td>{{ $kendaraan->merk }}</td>
                             <td>{{ $kendaraan->model }}</td>
                             <td>{{ $kendaraan->warna }}</td>
@@ -54,11 +54,33 @@
 
                                 <a href="#" class="btn btn-sm btn-danger" onclick="confirmDelete('{{route('delete.kendaraan',$kendaraan->id)}}')">Delete</a>
                             </td>
-
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                <div class="pagination">
+                        <span class="results-text">
+                            Showing {{ $kendaraans->firstItem() }} to {{ $kendaraans->lastItem() }} of {{ $kendaraans->total() }} results
+                        </span>
+
+                    <ul class="pagination-list">
+                        @if ($kendaraans->onFirstPage())
+                            <li class="disabled">Previous</li>
+                        @else
+                            <li>
+                                <a href="{{ $kendaraans->previousPageUrl() }}" rel="prev">Previous</a>
+                            </li>
+                        @endif
+
+                        @if ($kendaraans->hasMorePages())
+                            <li>
+                                <a href="{{ $kendaraans->nextPageUrl() }}" rel="next">Next</a>
+                            </li>
+                        @else
+                            <li class="disabled">Next</li>
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

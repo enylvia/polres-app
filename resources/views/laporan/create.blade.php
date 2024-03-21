@@ -25,7 +25,7 @@
                             <small>{{ $message }}</small>
                         @enderror
                         <label for="tanggal_laporan">Tanggal Laporan:</label>
-                        <input type="date" class="form-control" id="tanggal_laporan" name="tanggal_laporan" required>
+                        <input type="date" class="form-control" id="tanggal_laporan" value="{{ date('Y-m-d') }}" name="tanggal_laporan" required>
                     </div>
                     <div class="form-group col-md-6">
                         @error('tanggal_hilang')

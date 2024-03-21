@@ -14,7 +14,7 @@ class LaporanExport implements FromView, ShouldAutoSize, WithHeadings, WithStyle
     public function view(): View
     {
         return view('laporan.export', [
-            'laporan' => Laporan::select('laporans.no_laporan', 'laporans.tanggal_laporan', 'laporans.tanggal_hilang',
+            'laporan' => Laporan::select('laporans.no_laporan','laporans.alamat_pelapor','users.phone_number', 'laporans.tanggal_laporan', 'laporans.tanggal_hilang',
                 'kendaraans.no_rangka','kendaraans.no_mesin','kendaraans.warna','users.name','laporans.deskripsi')
                 ->join('kendaraans','laporans.id_kendaraan','=','kendaraans.id')
                 ->join('users','laporans.id_user','=','users.id')
@@ -32,6 +32,8 @@ class LaporanExport implements FromView, ShouldAutoSize, WithHeadings, WithStyle
             'No Mesin',
             'Warna',
             'Pelapor',
+            'Alamat Pelapor',
+            'Nomor HP',
             'Deskripsi',
         ];
     }

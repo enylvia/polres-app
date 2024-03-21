@@ -30,6 +30,8 @@
         <th>No Mesin</th>
         <th>Warna</th>
         <th>Pelapor</th>
+        <th>Alamat</th>
+        <th>Nomor Telepon</th>
         <th>Deskripsi</th>
     </tr>
     </thead>
@@ -43,6 +45,8 @@
             <td>{{ $data->no_mesin }}</td>
             <td>{{ $data->warna }}</td>
             <td>{{ $data->name }}</td>
+            <td>{{$data->alamat_pelapor}}</td>
+            <td>{{$data->phone_number}}</td>
             <td>{{ $data->deskripsi }}</td>
         </tr>
     @endforeach

@@ -60,7 +60,7 @@
                         <tbody>
                         @foreach($laporans as $key => $laporan)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
+                                <td>{{ ($laporans->currentPage() - 1) * $laporans->perPage() + $key + 1 }}</td>
                                 <td>{{ $laporan->no_laporan }}</td>
                                 <td>{{ $laporan->tanggal_laporan }}</td>
                                 <td>{{ $laporan->tanggal_hilang }}</td>
@@ -101,6 +101,29 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        <span class="results-text">
+                            Showing {{ $laporans->firstItem() }} to {{ $laporans->lastItem() }} of {{ $laporans->total() }} results
+                        </span>
+
+                        <ul class="pagination-list">
+                            @if ($laporans->onFirstPage())
+                                <li class="disabled">Previous</li>
+                            @else
+                                <li>
+                                    <a href="{{ $laporans->previousPageUrl() }}" rel="prev">Previous</a>
+                                </li>
+                            @endif
+
+                            @if ($laporans->hasMorePages())
+                                <li>
+                                    <a href="{{ $laporans->nextPageUrl() }}" rel="next">Next</a>
+                                </li>
+                            @else
+                                <li class="disabled">Next</li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
 
                 <script>

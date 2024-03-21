@@ -13,7 +13,7 @@ class KendaraanController extends Controller
 {
     public function index()
     {
-        $kendaraans = Kendaraan::where('id_user',Auth::id())->get();
+        $kendaraans = Kendaraan::where('id_user',Auth::id())->paginate(3);
         return view('kendaraan.index', compact('kendaraans'));
     }
 

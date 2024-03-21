@@ -56,7 +56,7 @@ class LaporanController extends Controller
         }
 
         // Ambil data laporan
-        $laporans = $query->where('is_arsip', false)->get();
+        $laporans = $query->where('is_arsip', false)->paginate(3);
 
         return view("laporan.index", compact('laporans'));
     }
@@ -71,7 +71,7 @@ class LaporanController extends Controller
                 ->with('errors', 'Unauthorized!');
         }
         if (Auth::user()->id_user_role == 2) {
-            $laporans = Laporan::with('LaporanStatus')->where('is_arsip', true)->get();
+            $laporans = Laporan::with('LaporanStatus')->where('is_arsip', true)->paginate(3);
         }
         return view("laporan.arsip",compact('laporans'));
     }
