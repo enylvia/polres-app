@@ -145,7 +145,7 @@ class LaporanController extends Controller
     // Menampilkan detail laporan
     public function show($id)
     {
-        $laporan = Laporan::with('kendaraan')->find($id);
+        $laporan = Laporan::with('kendaraan','user')->find($id);
         return view('laporan.detail', compact('laporan'));
     }
 

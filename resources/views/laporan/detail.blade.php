@@ -40,6 +40,9 @@
 
                         <dt class="col-sm-4">Warna :</dt>
                         <dd class="col-sm-8">{{ $laporan->kendaraan->warna }}</dd>
+
+                        <dt class="col-sm-4">Nomor Telepon Pelapor:</dt>
+                        <dd class="col-sm-8">{{$laporan->user->phone_number}}</dd>
                     </dl>
                 </div>
             </div>
