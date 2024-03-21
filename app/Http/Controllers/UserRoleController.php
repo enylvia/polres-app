@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\Hash;
 class UserRoleController extends Controller
 {
     //
-    public function index(){
-        $users = User::where('id_user_role',1)->get();
-        return view('user.index',compact('users'));
+    public function index(Request $request){
+        $users = User::where('id_user_role', 1);
+
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $users->where('name', 'like', '%' . $searchTerm . '%');
+        }
+
+        $users = $users->paginate(10);
+
+        return view('user.index', compact('users'));
     }
+
     public function edit($id)
     {
         $user = User::find($id);

@@ -13,9 +13,9 @@ class Laporan extends Model
     use HasFactory;
 
     protected $fillable = ['id_laporan_status','id_user','id_kendaraan','alamat_pelapor','no_laporan','tanggal_laporan','tanggal_hilang','deskripsi','is_arsip'];
-    public function User(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'id_user');
     }
     public function kendaraan(){
         return $this->belongsTo(Kendaraan::class,'id_kendaraan');

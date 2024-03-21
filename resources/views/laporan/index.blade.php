@@ -63,6 +63,7 @@
                                 <td>{{ ($laporans->currentPage() - 1) * $laporans->perPage() + $key + 1 }}</td>
                                 <td>{{ $laporan->no_laporan }}</td>
                                 <td>{{ $laporan->tanggal_laporan }}</td>
+                                <td>{{$laporan->user->name}}</td>
                                 <td>{{ $laporan->tanggal_hilang }}</td>
                                 <td>{{ $laporan->deskripsi }}</td>
                                 @if(Auth::user()->id_user_role == 1)
